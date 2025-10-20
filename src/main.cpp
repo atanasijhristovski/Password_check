@@ -10,8 +10,10 @@ Licence:         MIT
 bool pass_check(String);
 
 void setup() {
-  int versuche = 0; // Zähler für die Anzahl der Passwortversuche
   Serial.begin(115200);
+}
+void loop() {
+  int versuche = 0; // Zähler für die Anzahl der Passwortversuche
   // Schleife für maximal 3 Versuche
   for(versuche = 0; versuche < 3; versuche ++ )
   {
@@ -19,7 +21,7 @@ void setup() {
     while (Serial.available() == 0){}// Warten, bis der Benutzer etwas über die serielle Schnittstelle eingibt
     String password = Serial.readString(); // Lese die Eingabe als String
     password.trim(); // Entfernt führende und nachgestellte Leerzeichen oder Steuerzeichen
-
+    
     if(pass_check(password) == true)
     {
       Serial.println("");
@@ -35,9 +37,8 @@ void setup() {
   {
     Serial.println("Zugang verweigert");
   }
-}
 
-void loop() {
+  while (true){}
 }
 // Funktion, die das eingegebene Passwort überprüft
 bool pass_check(String eingabe) 
